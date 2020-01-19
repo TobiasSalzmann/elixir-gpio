@@ -4,18 +4,17 @@ defmodule ElixirGPIO do
     hello()
   end
 
-  def hello do
+  def hello(on \\ 1000, off \\ 1000) do
     {:ok, gpio} = Circuits.GPIO.open(18, :output)
-    loop(gpio)
+    loop(gpio, on, off)
     :world
   end
 
-  def loop(pin) do
+  def loop(pin on, off) do
     Circuits.GPIO.write(pin, 1)
-    IO.inspect("on")
-    :timer.sleep(1000)
+    :timer.sleep(on)
     Circuits.GPIO.write(pin, 0)
-    :timer.sleep(1000)
+    :timer.sleep(off)
     loop(pin)
   end
 end
