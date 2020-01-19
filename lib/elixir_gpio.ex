@@ -11,9 +11,9 @@ defmodule ElixirGPIO do
   end
 
   def loop(pin, on, off) do
-    Circuits.GPIO.write(pin, 1)
-    :timer.sleep(on)
     Circuits.GPIO.write(pin, 0)
+    :timer.sleep(on)
+    Circuits.GPIO.write(pin, 1)
     :timer.sleep(off)
     loop(pin, on, off)
   end
